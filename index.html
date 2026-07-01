@@ -64,7 +64,29 @@
   /* Hero */
   .hero {
     padding: 120px 0 80px;
-    text-align: left;
+  }
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .hero-text { flex: 1; min-width: 0; text-align: left; }
+  .hero-photo {
+    flex-shrink: 0;
+  }
+  .hero-photo img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .hero-photo img:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
   }
   .eyebrow {
     color: var(--accent);
@@ -259,6 +281,10 @@
     .about-grid { grid-template-columns: 1fr; }
     .nav-links { gap: 16px; }
     .hero { padding: 90px 0 60px; }
+    .hero-inner { flex-direction: column-reverse; text-align: center; }
+    .hero-text { text-align: center; }
+    .btn-row { justify-content: center; }
+    .hero-photo img { width: 160px; height: 160px; }
   }
 </style>
 </head>
@@ -278,17 +304,24 @@
 </header>
 
 <section class="hero wrap">
-  <div class="eyebrow">IPM Student, IIM Jammu · Finance & Technology</div>
-  <h1>Hi, I'm <span class="accent">Jishnu Chowdary</span>.<br>I explore where markets meet code.</h1>
-  <p class="lead">
-    Integrated Program in Management (IPM) student at IIM Jammu, specializing at the
-    intersection of corporate finance, data analytics, and software engineering —
-    combining rigorous management frameworks with hands-on technical skills.
-  </p>
-  <div class="btn-row">
-    <a href="#projects" class="btn btn-primary">View Projects</a>
-    <a href="Jishnu_Chowdary_CV.pdf" class="btn btn-secondary" target="_blank" rel="noopener">View My CV</a>
-    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow">IPM Student, IIM Jammu · Finance & Technology</div>
+      <h1>Hi, I'm <span class="accent">Jishnu Chowdary</span>.<br>I explore where markets meet code.</h1>
+      <p class="lead">
+        Integrated Program in Management (IPM) student at IIM Jammu, specializing at the
+        intersection of corporate finance, data analytics, and software engineering —
+        combining rigorous management frameworks with hands-on technical skills.
+      </p>
+      <div class="btn-row">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="Jishnu_Chowdary_CV.pdf" class="btn btn-secondary" target="_blank" rel="noopener">View My CV</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="profile.jpg" alt="Jishnu Chowdary" />
+    </div>
   </div>
 </section>
 
