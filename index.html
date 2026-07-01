@@ -1,35 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Professional Profile</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f4; color: #333; }
-        .container { background: white; padding: 30px; border-radius: 8px; max-width: 800px; margin: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h1 { color: #0066cc; }
-        .links a { margin-right: 15px; color: #333; text-decoration: none; font-weight: bold; }
-        .links a:hover { color: #0066cc; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jishnu Chowdary | Finance & Technology</title>
+<meta name="description" content="Portfolio of a BBA student passionate about finance and technology." />
+
+<style>
+  :root {
+    --bg: #0b0f14;
+    --bg-alt: #10161d;
+    --card: #131a22;
+    --border: #1f2a35;
+    --text: #e7edf3;
+    --text-dim: #9fb0bf;
+    --accent: #3ddc97;
+    --accent-2: #4f9dff;
+    --max-width: 960px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(11, 15, 20, 0.75);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo { font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+  /* Hero */
+  .hero {
+    padding: 120px 0 80px;
+    text-align: left;
+  }
+  .eyebrow {
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .hero h1 .accent { color: var(--accent-2); }
+  .hero p.lead {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    max-width: 620px;
+    margin-bottom: 32px;
+  }
+  .btn-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #06110c;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(61, 220, 151, 0.25);
+    text-decoration: none;
+  }
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent-2);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  /* Section shared styles */
+  section { padding: 70px 0; border-top: 1px solid var(--border); }
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    font-size: 0.98rem;
+  }
+
+  /* Fade-in on scroll */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .about-grid p { color: var(--text-dim); margin-bottom: 16px; }
+  .fact-list { list-style: none; }
+  .fact-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+  .fact-list li span:first-child { color: var(--text-dim); }
+  .fact-list li span:last-child { font-weight: 600; }
+
+  /* Skills / Interests grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-2);
+  }
+  .card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card p { color: var(--text-dim); font-size: 0.92rem; }
+  .tag-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  /* Projects */
+  .project {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s ease;
+  }
+  .project:hover { border-color: var(--accent); }
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .project h3 { font-size: 1.1rem; }
+  .project .date { color: var(--text-dim); font-size: 0.85rem; }
+  .project p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 12px; }
+  .chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-size: 0.78rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(79, 157, 255, 0.1);
+    color: var(--accent-2);
+    border: 1px solid rgba(79, 157, 255, 0.25);
+  }
+
+  /* Contact */
+  .contact-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .contact-card {
+    flex: 1;
+    min-width: 200px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .contact-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+  .contact-card .label {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 700px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 16px; }
+    .hero { padding: 90px 0 60px; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hi, I'm [Your Name]</h1>
-        <p>Welcome to my personal profile page. I am a student/professional interested in data, development, and building cool projects.</p>
-        
-        <h2>About Me</h2>
-        <p>Write a brief, compelling bio here highlighting your skills, academic background, or career goals.</p>
-        
-        <h2>Projects</h2>
-        <ul>
-            <li><strong>Project 1:</strong> Brief description of what you built and the tools used.</li>
-            <li><strong>Project 2:</strong> Another impressive piece of work.</li>
-        </ul>
 
-        <div class="links">
-            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-            <a href="mailto:your.email@example.com">Email Me</a>
-        </div>
+<header>
+  <nav class="wrap">
+    <div class="logo">Your Name<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero wrap">
+  <div class="eyebrow">BBA Student · Finance & Technology</div>
+  <h1>Hi, I'm <span class="accent">Your Name</span>.<br>I explore where markets meet code.</h1>
+  <p class="lead">
+    2nd-year BBA student building a foundation in corporate finance, capital markets,
+    and data-driven decision making — with a growing interest in how technology
+    is reshaping the financial world.
+  </p>
+  <div class="btn-row">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-title fade-up">About Me</div>
+    <p class="section-sub fade-up">A quick snapshot of who I am and what I'm working on.</p>
+    <div class="about-grid">
+      <div class="fade-up">
+        <p>
+          I'm currently pursuing my Bachelor's in Business Administration, with coursework
+          spanning corporate finance, accounting, and business analytics. I'm particularly
+          drawn to capital markets, valuation, and the growing intersection of finance and
+          technology — from fintech products to data-driven investment tools.
+        </p>
+        <p>
+          This website is part of an academic assignment, and also a small step toward
+          building my own presence online as I explore internships and opportunities in
+          finance and tech.
+        </p>
+      </div>
+      <ul class="fact-list fade-up">
+        <li><span>Program</span><span>BBA, 2nd Year</span></li>
+        <li><span>Focus Areas</span><span>Finance & Technology</span></li>
+        <li><span>Interests</span><span>Capital Markets, Fintech</span></li>
+        <li><span>Location</span><span>Your City, Country</span></li>
+        <li><span>Status</span><span>Open to Internships</span></li>
+      </ul>
     </div>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="wrap">
+    <div class="section-title fade-up">Areas of Interest</div>
+    <p class="section-sub fade-up">Topics I actively read about and enjoy working on.</p>
+    <div class="grid">
+      <div class="card fade-up">
+        <h3><span class="tag-dot"></span>Corporate Finance</h3>
+        <p>Capital budgeting, valuation, time value of money, and financial statement analysis.</p>
+      </div>
+      <div class="card fade-up">
+        <h3><span class="tag-dot"></span>Capital Markets</h3>
+        <p>Equity and debt markets, IPOs, and how global markets respond to macro events.</p>
+      </div>
+      <div class="card fade-up">
+        <h3><span class="tag-dot"></span>Fintech</h3>
+        <p>Digital payments, robo-advisory platforms, and how technology is changing banking.</p>
+      </div>
+      <div class="card fade-up">
+        <h3><span class="tag-dot"></span>Data & Analytics</h3>
+        <p>Using spreadsheets, Python, and data tools to support better financial decisions.</p>
+      </div>
+      <div class="card fade-up">
+        <h3><span class="tag-dot"></span>Business Strategy</h3>
+        <p>How companies allocate capital, manage risk, and grow sustainably over time.</p>
+      </div>
+      <div class="card fade-up">
+        <h3><span class="tag-dot"></span>Personal Finance</h3>
+        <p>Budgeting, investing basics, and building healthy long-term financial habits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-title fade-up">Projects & Coursework</div>
+    <p class="section-sub fade-up">A few things I've worked on so far. Replace with your own.</p>
+
+    <div class="project fade-up">
+      <div class="project-header">
+        <h3>Capital Budgeting Analysis</h3>
+        <span class="date">2026</span>
+      </div>
+      <p>Evaluated investment proposals using NPV, IRR, Payback Period, and ARR to compare
+        project viability under different discount rate assumptions.</p>
+      <div class="chip-row">
+        <span class="chip">Finance</span>
+        <span class="chip">Excel</span>
+        <span class="chip">NPV / IRR</span>
+      </div>
+    </div>
+
+    <div class="project fade-up">
+      <div class="project-header">
+        <h3>Master Budget Simulation</h3>
+        <span class="date">2026</span>
+      </div>
+      <p>Built a complete master budget for a hypothetical firm, covering production, materials,
+        COGS, and COGM, to understand how operational plans translate into financial outcomes.</p>
+      <div class="chip-row">
+        <span class="chip">Managerial Accounting</span>
+        <span class="chip">Budgeting</span>
+      </div>
+    </div>
+
+    <div class="project fade-up">
+      <div class="project-header">
+        <h3>This Portfolio Website</h3>
+        <span class="date">2026</span>
+      </div>
+      <p>Designed and coded this website from scratch as a class assignment, and to start
+        building a small personal presence online — hosted for free on GitHub Pages.</p>
+      <div class="chip-row">
+        <span class="chip">HTML / CSS / JS</span>
+        <span class="chip">GitHub Pages</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-title fade-up">Get in Touch</div>
+    <p class="section-sub fade-up">Feel free to reach out — I'm always happy to connect.</p>
+    <div class="contact-row fade-up">
+      <div class="contact-card">
+        <div class="label">Email</div>
+        <a href="mailto:ipm250@iimj.ac.in">ipm25067@iimj.ac.in</a>
+      </div>
+      <div class="contact-card">
+        <div class="label">LinkedIn</div>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">/in/yourprofile</a>
+      </div>
+      <div class="contact-card">
+        <div class="label">GitHub</div>
+        <a href="https://github.com/KopiW123" target="_blank" rel="noopener">@KopiW123</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; <span id="year"></span> Your Name. Built with HTML, CSS & a little JavaScript.
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Lightweight scroll-based fade-in using IntersectionObserver
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  faders.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
